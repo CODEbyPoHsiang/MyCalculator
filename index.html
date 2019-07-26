@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Calculator</title>
+
+    <style>
+        body {
+            font-family: arial, "Microsoft JhengHei", "微軟正黑體", sans-serif !important;
+        }
+        /* 計算機外框設定 */
+        
+        #outSide {
+            width: 450px;
+            background-color: #110f13;
+            margin: 5px auto 10px;
+            position: center absolute;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 630px;
+            border-radius: 40px;
+        }
+        /* 計算機螢幕設定 */
+        
+        .numScr {
+            font-family: 'Inconsolata', monospace;
+            width: 400px;
+            height: 90px;
+            background-color: #d3e4d1;
+            margin-bottom: 50px;
+            border-radius: 30px;
+            text-align: right;
+            font-size: 60px;
+            line-height: 80px;
+            position: relative;
+        }
+        /* 鍵盤背景設定 */
+        
+        #numCover {
+            width: 410px;
+            height: 370px;
+            background-color: #d6cdbe;
+            border-radius: 40px;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        /* 數字按鈕設定 */
+        
+        .numBer {
+            width: 80px;
+            display: inline-block;
+            background-color: #2d2b2e;
+            height: 80px;
+            margin-left: 10px;
+            margin-top: 5px;
+            color: white;
+            line-height: 80px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 40px;
+        }
+        /* 清除按鈕設定 */
+        
+        .clearNum {
+            width: 80px;
+            display: inline-block;
+            background-color: #a75a67;
+            height: 80px;
+            margin-left: 10px;
+            margin-top: 5px;
+            color: white;
+            line-height: 80px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 40px;
+        }
+        /* 等於的按鈕設定 */
+        
+        .contNum {
+            width: 80px;
+            display: inline-block;
+            background-color: #a75a67;
+            height: 80px;
+            margin-left: 10px;
+            margin-top: 5px;
+            color: blanchedalmond;
+            line-height: 80px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 40px;
+        }
+        /* 加減乘除按鈕設定 */
+        
+        .opNum {
+            width: 80px;
+            display: inline-block;
+            background-color: #a8792e;
+            height: 80px;
+            margin-left: 10px;
+            margin-top: 5px;
+            color: white;
+            line-height: 80px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 45px;
+        }
+    </style>
+</head>
+
+<>
+    <!-- outside = 計算機外框 -->
+    <div id="outSide">
+        <!-- 螢幕 -->
+        <div class="numScr">
+            <p id="result"></p>
+        </div>
+        <!-- 按鈕設定 -->
+        <div id="numCover">
+            <div>
+                <div class="numBer" type="button" onclick="numClick('1')">1</div>
+                <div class="numBer" type="button" onclick="numClick('2')">2</div>
+                <div class="numBer" type="button" onclick="numClick('3')">3</div>
+                <div class="opNum" type="button" onclick="operatorClick('+')">+</div>
+                <div class="numBer" type="button" onclick="numClick('4')">4</div>
+                <div class="numBer" type="button" onclick="numClick('5')">5</div>
+                <div class="numBer" type="button" onclick="numClick('6')">6</div>
+                <div class="opNum" type="button" onclick="operatorClick('-')">-</div>
+                <div class="numBer" type="button" onclick="numClick('7')">7</div>
+                <div class="numBer" type="button" onclick="numClick('8')">8</div>
+                <div class="numBer" type="button" onclick="numClick('9')">9</div>
+                <div class="opNum" type="button" onclick="operatorClick('*')">x</div>
+                <div class="numBer" type="button" onclick="numClick('0')">0</div>
+                <div class="clearNum" type="button" onclick="operatorClick('ac')">清除</div>
+                <div class="contNum" type="button" onclick="answer()">等於</div>
+                <div class="opNum" type="button" onclick="operatorClick('/')">÷</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var firstNum;
+        var op; //紀錄按下去的四則運算符號是什麼
+        // 數值類型
+        function numClick(num) {
+            document.getElementById('result').innerHTML =
+                document.getElementById('result').innerHTML + num;
+        }
+        // 符號類型
+        function operatorClick(str) {
+
+            // if(fidstNum == -1)
+            // 記錄下來現在畫面上面是什麼數值
+            firstNum = document.getElementById('result').innerHTML;
+            // 清空畫面
+            document.getElementById('result').innerHTML = "";
+
+            console.log(firstNum);
+            console.log(op);
+
+            //紀錄符號
+            op = str;
+        }
+        // 答案
+        function answer() {
+            // 如果op是+就+如果op是-就是-
+            if (op == "+") {
+                // 計算
+                temp = parseInt(firstNum) + parseInt(document.getElementById('result').innerHTML)
+            } else if (op == '-') {
+                temp = parseInt(firstNum) - parseInt(document.getElementById('result').innerHTML)
+            } else if (op == '/') {
+                temp = parseInt(firstNum) / parseInt(document.getElementById('result').innerHTML)
+            } else if (op == '*') {
+                temp = parseInt(firstNum) * parseInt(document.getElementById('result').innerHTML)
+            } else if (op == 'ac') {
+                document.getElementById('result').innerHTML = ""
+            }
+
+            document.getElementById('result').innerHTML = temp;
+            console.log(temp);
+        }
+    </script>
+    </body>
+
+</html>
